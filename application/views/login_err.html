@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title> </title>
+
+  </head>
+
+  <body class="login">
+
+   <div style="text-align: center;">
+    <!-- alert -->
+    <?php
+
+      $cek_user=$this->db->query("SELECT * FROM user WHERE username='$user' && password='$pass' ")->num_rows();
+      
+      if(empty($user))
+          {
+             echo "
+             <div class='alert alert-danger'>
+              <strong>Pesan!</strong> username atau password kosong
+            </div>
+            ";
+          }
+          elseif(empty($pass))
+          {
+             echo "
+             <div class='alert alert-danger'>
+              <strong>Pesan!</strong> username atau password kosong
+            </div>
+            ";
+          }
+          elseif(!preg_match("/^[a-z0-9]/",$user))
+          {
+            echo "
+             <div class='alert alert-danger'>
+              <strong>Pesan!</strong> username salah
+            </div>
+            ";
+          }
+          elseif($cek_user == 0)
+          {
+              echo "
+             <div class='alert alert-danger'>
+              <strong>Pesan!</strong> username atau password tidak benar
+            </div>
+             ";
+          }
+          elseif($ol == 503)
+          {
+              echo "
+             <div class='alert alert-warning'>
+              <strong>Pesan!</strong> sedang dalam perbaikan
+            </div>
+             ";
+          }
+
+    ?>  
+    </div>
+
+
+    <div>
+      <a class="hiddenanchor" id="signup"></a>
+      <a class="hiddenanchor" id="signin"></a>
+
+      <div class="login_wrapper">
+        <div class="animate form login_form">
+          <section class="login_content">
+            <form action="<?php echo site_url('form_login/login');?>" method="post">
+              <h1>PROCUREMENT</h1>
+      
+              <div>
+                <input type="text" name="username" class="form-control" placeholder="Username" required="" />
+              </div>
+              <div>
+                <input type="password" name="password" class="form-control" placeholder="Password" required="" />
+              </div>
+              <div>
+                <button type="submit" class="btn btn-default">Log in</button>
+                <a class="reset_pass" href="#">Lupa password?</a>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+                <p class="change_link">Belum punya akun?
+                  <a href="#signup" class="to_register"> Register akun </a>
+                </p>
+
+                <div class="clearfix"></div>
+                <br />
+
+                
+              </div>
+            </form>
+          </section>
+        </div>
+
+        <div id="register" class="animate form registration_form">
+          <section class="login_content">
+            <form>
+              <h1>REGISTRASI AKUN</h1>
+              <div>
+                <input type="text" name="nama" class="form-control" placeholder="Nama lengkap" required="" />
+              </div>
+              <div>
+                <input type="text" name="username" class="form-control" placeholder="Username" required="" />
+              </div>
+              
+              <div>
+                <input type="password" class="form-control" placeholder="Password" required="" />
+              </div>
+              <div>
+                <a class="btn btn-default submit" href="#">Submit</a>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+                <p class="change_link">Sudah punya akun ?
+                  <a href="#signin" class="to_register"> Log in </a>
+                </p>
+
+                <div class="clearfix"></div>
+                <br />
+
+                
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
